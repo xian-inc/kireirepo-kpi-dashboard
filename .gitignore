@@ -1,0 +1,9 @@
+*.pyc
+__pycache__/
+service_account_key.json
+*.xlsx
+_slack_message.txt
+_cron.log
+.DS_Store
+.env
+*.secret

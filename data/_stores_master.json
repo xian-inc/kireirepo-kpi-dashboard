@@ -1,0 +1,728 @@
+[
+  {
+    "store_id": 74,
+    "widget_clinic_id": 19,
+    "クリニック名": "東京美容外科 銀座院",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 75,
+    "widget_clinic_id": 20,
+    "クリニック名": "東京美容外科 福山院",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 76,
+    "widget_clinic_id": 14,
+    "クリニック名": "東京美容外科 赤坂院",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 77,
+    "widget_clinic_id": 23,
+    "クリニック名": "東京美容外科 秋田院",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 78,
+    "widget_clinic_id": 21,
+    "クリニック名": "東京美容外科 名古屋院",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 79,
+    "widget_clinic_id": 22,
+    "クリニック名": "東京美容外科 新宿院",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 82,
+    "widget_clinic_id": 15,
+    "クリニック名": "東京美容外科 梅田院",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 83,
+    "widget_clinic_id": 16,
+    "クリニック名": "東京美容外科 沖縄院",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 86,
+    "widget_clinic_id": 17,
+    "クリニック名": "東京美容外科 福岡院",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 87,
+    "widget_clinic_id": 24,
+    "クリニック名": "東京美容外科 青森院",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 123,
+    "widget_clinic_id": 13,
+    "クリニック名": "表参道メディカルクリニック 銀座院",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 127,
+    "widget_clinic_id": 11,
+    "クリニック名": "表参道メディカルクリニック 大阪院",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 1400,
+    "widget_clinic_id": 18,
+    "クリニック名": "東京美容外科 札幌院",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 1413,
+    "widget_clinic_id": 12,
+    "クリニック名": "表参道メディカルクリニック 名古屋院",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 1929,
+    "widget_clinic_id": 2,
+    "クリニック名": "Ginza78Clinic(銀座セブンエイトクリニック)",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 5475,
+    "widget_clinic_id": 26,
+    "クリニック名": "東京美容外科 池袋院",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 11207,
+    "widget_clinic_id": 3,
+    "クリニック名": "南青山セントラルクリニック",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 12326,
+    "widget_clinic_id": 76,
+    "クリニック名": "ウェルネスプラスクリニック(WellnessPlus Clinic)",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 86147,
+    "widget_clinic_id": 9,
+    "クリニック名": "GRACY TOKYO CLINIC(グレイシー東京クリニック)",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 86176,
+    "widget_clinic_id": 89,
+    "クリニック名": "新宿Ladies&Gentlemen美容クリニック",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 86871,
+    "widget_clinic_id": 6,
+    "クリニック名": "ラフェクリニック(Lafee Clinic)",
+    "予約方式": "rakumane_connected"
+  },
+  {
+    "store_id": 88,
+    "widget_clinic_id": 118,
+    "クリニック名": "共立美容外科 名古屋院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 89,
+    "widget_clinic_id": 112,
+    "クリニック名": "共立美容外科 新宿本院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 90,
+    "widget_clinic_id": 119,
+    "クリニック名": "共立美容外科 広島院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 91,
+    "widget_clinic_id": 120,
+    "クリニック名": "共立美容外科 福岡院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 92,
+    "widget_clinic_id": 121,
+    "クリニック名": "共立美容外科 高松院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 93,
+    "widget_clinic_id": 122,
+    "クリニック名": "共立美容外科 浜松院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 94,
+    "widget_clinic_id": 123,
+    "クリニック名": "共立美容外科 梅田院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 95,
+    "widget_clinic_id": 124,
+    "クリニック名": "共立美容外科 大阪心斎橋本院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 97,
+    "widget_clinic_id": 125,
+    "クリニック名": "共立美容外科 大分院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 169,
+    "widget_clinic_id": 106,
+    "クリニック名": "美容皮膚科エルムクリニック 大阪院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 445,
+    "widget_clinic_id": 111,
+    "クリニック名": "レアグラントクリニック中目黒(LEAGRANT CLINIC)",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 661,
+    "widget_clinic_id": 97,
+    "クリニック名": "銀座TAクリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 857,
+    "widget_clinic_id": 114,
+    "クリニック名": "アリエル美容クリニック 大宮院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 958,
+    "widget_clinic_id": 83,
+    "クリニック名": "クリニーク 福岡天神",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1198,
+    "widget_clinic_id": 98,
+    "クリニック名": "横浜TAクリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1225,
+    "widget_clinic_id": 79,
+    "クリニック名": "形成外科・美容外科ぎふスキンケアクリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1237,
+    "widget_clinic_id": 99,
+    "クリニック名": "高崎TAクリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1302,
+    "widget_clinic_id": 100,
+    "クリニック名": "仙台TAクリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1305,
+    "widget_clinic_id": 101,
+    "クリニック名": "川越TAクリニックアソシエ",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1314,
+    "widget_clinic_id": 102,
+    "クリニック名": "大阪TAクリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1360,
+    "widget_clinic_id": 103,
+    "クリニック名": "福岡TAクリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1415,
+    "widget_clinic_id": 126,
+    "クリニック名": "共立美容外科 銀座院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1416,
+    "widget_clinic_id": 127,
+    "クリニック名": "共立美容外科 立川院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1418,
+    "widget_clinic_id": 128,
+    "クリニック名": "共立美容外科 横浜院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1419,
+    "widget_clinic_id": 129,
+    "クリニック名": "共立美容外科 千葉院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1426,
+    "widget_clinic_id": 130,
+    "クリニック名": "共立美容外科 京都院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1427,
+    "widget_clinic_id": 131,
+    "クリニック名": "共立美容外科 神戸三宮院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1428,
+    "widget_clinic_id": 132,
+    "クリニック名": "共立美容外科 岡山院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1429,
+    "widget_clinic_id": 133,
+    "クリニック名": "共立美容外科 熊本院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1469,
+    "widget_clinic_id": 75,
+    "クリニック名": "スキンラボクリニック五反田(SKIN LAB CLINIC)",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1651,
+    "widget_clinic_id": 91,
+    "クリニック名": "ラムールクリニック東京 渋谷院(L'amour clinic Tokyo)",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1654,
+    "widget_clinic_id": 93,
+    "クリニック名": "エーアイ美容クリニック(AI Beauty Clinic)",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1669,
+    "widget_clinic_id": 94,
+    "クリニック名": "カリスビューティークリニック(KARIS beauty clinic)",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1694,
+    "widget_clinic_id": 96,
+    "クリニック名": "東京ココセランクリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1708,
+    "widget_clinic_id": 10,
+    "クリニック名": "ルナビューティークリニック 銀座院(LUNA BEAUTY CLINIC)",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1748,
+    "widget_clinic_id": 104,
+    "クリニック名": "新宿TAクリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1789,
+    "widget_clinic_id": 115,
+    "クリニック名": "アリエル美容クリニック 郡山院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1836,
+    "widget_clinic_id": 32,
+    "クリニック名": "ネビュラクリニック 広島院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1849,
+    "widget_clinic_id": 105,
+    "クリニック名": "札幌TAクリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 1901,
+    "widget_clinic_id": 113,
+    "クリニック名": "いとうらんクリニック四条烏丸",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 2010,
+    "widget_clinic_id": 109,
+    "クリニック名": "デイズビューティークリニック 新宿院(Days Beauty Clinic)",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 2034,
+    "widget_clinic_id": 27,
+    "クリニック名": "ナチュラルスキンクリニック 笹塚院(Natural Skin Clinic)",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 3428,
+    "widget_clinic_id": 85,
+    "クリニック名": "みやざき美容クリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 3664,
+    "widget_clinic_id": 86,
+    "クリニック名": "池袋セントラルクリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 3980,
+    "widget_clinic_id": 77,
+    "クリニック名": "ヒルズ美容クリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 4144,
+    "widget_clinic_id": 87,
+    "クリニック名": "けやき美容クリニック 静岡本院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 4157,
+    "widget_clinic_id": 84,
+    "クリニック名": "けやき美容クリニック 沼津院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 4229,
+    "widget_clinic_id": 82,
+    "クリニック名": "ワイエス美容外科クリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 5185,
+    "widget_clinic_id": 81,
+    "クリニック名": "クリニックビザリア 名古屋院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 5239,
+    "widget_clinic_id": 7,
+    "クリニック名": "渋谷文化村通り皮膚科",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 5377,
+    "widget_clinic_id": 43,
+    "クリニック名": "ジュノビューティークリニック 錦糸町院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 5727,
+    "widget_clinic_id": 5,
+    "クリニック名": "PRISM Beauty Clinic 町田院（プリズムビューティークリニック）",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 11189,
+    "widget_clinic_id": 41,
+    "クリニック名": "ピオーネビューティクリニック(PIONE BEAUTY CLINIC)",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 11221,
+    "widget_clinic_id": 29,
+    "クリニック名": "ON-CLINIC Beauty(オンクリニックビューティー)",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 12324,
+    "widget_clinic_id": 95,
+    "クリニック名": "シグネチャークリニック(SIGNATURE CLINIC) 銀座",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 85697,
+    "widget_clinic_id": 66,
+    "クリニック名": "AND美容外科 渋谷院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 85718,
+    "widget_clinic_id": 92,
+    "クリニック名": "エムケークリニック(MK CLINIC) 日本橋院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 85727,
+    "widget_clinic_id": 78,
+    "クリニック名": "Tクリニック(T clinic Kakogawa)",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 85759,
+    "widget_clinic_id": 110,
+    "クリニック名": "クリアクリニック(CLEAR CLINIC)",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 85952,
+    "widget_clinic_id": 45,
+    "クリニック名": "ジュノビューティークリニック 福島院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 85960,
+    "widget_clinic_id": 47,
+    "クリニック名": "ジュノビューティークリニック 広島院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86041,
+    "widget_clinic_id": 49,
+    "クリニック名": "AND美容外科 池袋院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86157,
+    "widget_clinic_id": 28,
+    "クリニック名": "ナチュラルスキンクリニック 自由が丘院(Natural Skin Clinic)",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86163,
+    "widget_clinic_id": 88,
+    "クリニック名": "カイクリニックトウキョウ(KAI CLINIC TOKYO)",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86196,
+    "widget_clinic_id": 31,
+    "クリニック名": "ネビュラクリニック 東京錦糸町院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86202,
+    "widget_clinic_id": 107,
+    "クリニック名": "デイズビューティークリニック 本厚木院(Days Beauty Clinic)",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86203,
+    "widget_clinic_id": 44,
+    "クリニック名": "ジュノビューティークリニック 川崎院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86204,
+    "widget_clinic_id": 46,
+    "クリニック名": "ジュノビューティークリニック 金沢院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86341,
+    "widget_clinic_id": 30,
+    "クリニック名": "LIVIN CLINIC",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86718,
+    "widget_clinic_id": 116,
+    "クリニック名": "アリエル美容クリニック 横浜院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86722,
+    "widget_clinic_id": 50,
+    "クリニック名": "AND美容外科 宇都宮院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86723,
+    "widget_clinic_id": 51,
+    "クリニック名": "AND美容外科 千葉院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86724,
+    "widget_clinic_id": 52,
+    "クリニック名": "AND美容外科 柏院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86725,
+    "widget_clinic_id": 53,
+    "クリニック名": "AND美容外科 松戸院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86727,
+    "widget_clinic_id": 54,
+    "クリニック名": "AND美容外科 横浜院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86729,
+    "widget_clinic_id": 55,
+    "クリニック名": "AND美容外科 札幌院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86731,
+    "widget_clinic_id": 56,
+    "クリニック名": "AND美容外科 青森院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86733,
+    "widget_clinic_id": 57,
+    "クリニック名": "AND美容外科 新潟院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86734,
+    "widget_clinic_id": 58,
+    "クリニック名": "AND美容外科 名古屋院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86736,
+    "widget_clinic_id": 59,
+    "クリニック名": "AND美容外科 静岡院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86737,
+    "widget_clinic_id": 48,
+    "クリニック名": "AND美容外科 心斎橋院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86739,
+    "widget_clinic_id": 60,
+    "クリニック名": "AND美容外科 神戸三宮院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86741,
+    "widget_clinic_id": 61,
+    "クリニック名": "AND美容外科 高松院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86742,
+    "widget_clinic_id": 62,
+    "クリニック名": "AND美容外科 松山院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86744,
+    "widget_clinic_id": 63,
+    "クリニック名": "AND美容外科 天神南院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86745,
+    "widget_clinic_id": 64,
+    "クリニック名": "AND美容外科 熊本院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86747,
+    "widget_clinic_id": 65,
+    "クリニック名": "AND美容外科 那覇院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86816,
+    "widget_clinic_id": 39,
+    "クリニック名": "ピュアリス トウキョウ クリニック(Purelys TOKYO CLINIC)",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86822,
+    "widget_clinic_id": 90,
+    "クリニック名": "さえらクリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86851,
+    "widget_clinic_id": 8,
+    "クリニック名": "池袋サンシャイン通り皮膚科",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86885,
+    "widget_clinic_id": 4,
+    "クリニック名": "PRISM Beauty Clinic 新宿院（プリズムビューティークリニック）",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86887,
+    "widget_clinic_id": 108,
+    "クリニック名": "デイズビューティークリニック 銀座院(Days Beauty Clinic)",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86929,
+    "widget_clinic_id": 33,
+    "クリニック名": "ネビュラクリニック 京都院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86930,
+    "widget_clinic_id": 34,
+    "クリニック名": "神戸美容外科ネビュラクリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86931,
+    "widget_clinic_id": 35,
+    "クリニック名": "小倉美容外科ネビュラクリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86932,
+    "widget_clinic_id": 36,
+    "クリニック名": "札幌美容外科ネビュラクリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86933,
+    "widget_clinic_id": 37,
+    "クリニック名": "新宿美容外科ネビュラクリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 86934,
+    "widget_clinic_id": 38,
+    "クリニック名": "愛知春日井美容外科ネビュラクリニック",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 87016,
+    "widget_clinic_id": 42,
+    "クリニック名": "ジュノビューティークリニック 新宿院",
+    "予約方式": "request_only"
+  },
+  {
+    "store_id": 87082,
+    "widget_clinic_id": 117,
+    "クリニック名": "アリエル美容クリニック 水戸院",
+    "予約方式": "request_only"
+  }
+]
