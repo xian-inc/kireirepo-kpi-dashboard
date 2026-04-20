@@ -212,16 +212,20 @@ def build_summary(month_filter=None):
 
 # ======== サイドバー ========
 st.sidebar.title("🔍 フィルタ")
-search_query = st.sidebar.text_input("クリニック名検索", "")
+search_query = st.sidebar.text_input("🔍 検索（store_id または クリニック名）", "", placeholder="例: 86871 または ラフェ")
 show_no_rsv = st.sidebar.checkbox("🔥 予約0のみ (営業チャンス)", value=False)
-yoyaku_type = st.sidebar.selectbox("予約方式", ["全て", "rakumane_connected（即時予約）", "request_only（リクエスト予約）"])
+yoyaku_type = st.sidebar.selectbox("予約方式", ["全て", "rakumane_connected(即時予約)", "request_only(リクエスト予約)"])
 sort_by = st.sidebar.selectbox("並び順", ["合計SS", "予約数", "予約率(%)", "クリニック名"])
 sort_asc = st.sidebar.checkbox("昇順", value=False)
 
 def filter_and_sort(df):
     out = df.copy()
     if search_query:
-        out = out[out["クリニック名"].str.contains(search_query, case=False, na=False)]
+        q = search_query.strip()
+        # store_id (数字のみ) または クリニック名 で部分一致
+        mask_id = out["store_id"].astype(str).str.contains(q, case=False, na=False)
+        mask_name = out["クリニック名"].str.contains(q, case=False, na=False)
+        out = out[mask_id | mask_name]
     if show_no_rsv:
         out = out[(out["予約数"]==0) & (out["合計SS"]>0)]
     if yoyaku_type != "全て":
@@ -233,8 +237,12 @@ df_total = build_summary()
 df_filtered_total = filter_and_sort(df_total)
 
 st.sidebar.markdown("---")
-clinic_options = df_filtered_total["クリニック名"].tolist() if len(df_filtered_total) > 0 else df_total["クリニック名"].tolist()
-selected_clinic = st.sidebar.selectbox("🏥 クリニック選択（詳細タブ用）", clinic_options, index=0 if clinic_options else None)
+# 「store_id｜クリニック名」形式で選択肢を作る
+base_df = df_filtered_total if len(df_filtered_total) > 0 else df_total
+clinic_options_labeled = [f"{r['store_id']}｜{r['クリニック名']}" for _, r in base_df.iterrows()]
+selected_label = st.sidebar.selectbox("🏥 クリニック選択（詳細タブ用）", clinic_options_labeled, index=0 if clinic_options_labeled else None)
+# "｜"で分割してクリニック名だけ取り出す
+selected_clinic = selected_label.split("｜", 1)[1] if selected_label else None
 
 # ======== メイン ========
 st.title("🏥 予約解放済みクリニック 営業ダッシュボード")
@@ -250,30 +258,34 @@ MENU_COLS = ["sp-menu数","キレイレポ限定数"]
 TOTAL_COLS = ["合計SS"]
 
 def style_df(df):
-    """SS系=青、経由=緑、予約=オレンジ、メニュー=紫でセル色分け。合計列は濃色で強調"""
+    """合計系は大きく濃色で強調、カテゴリ別に色分け"""
     styles = pd.DataFrame("", index=df.index, columns=df.columns)
-    # 合計SS（最上位）= 濃紺+白字+太字
+    # 🏆 合計SS（最重要）= 濃紺+白字+太字+大きめ
     for col in TOTAL_COLS:
         if col in df.columns:
-            styles[col] = "background-color: #1F4E79; color: white; font-weight: bold"
-    # ランディング_合計 = 濃青+白字+太字
+            styles[col] = "background-color: #0D47A1; color: white; font-weight: 900; font-size: 15px; border: 2px solid #1F4E79"
+    # ランディング_合計 = 青強調
     for col in LANDING_TOTAL_COLS:
         if col in df.columns:
-            styles[col] = "background-color: #1976D2; color: white; font-weight: bold"
-    # ランディング内訳 = 薄青+濃い青字
+            styles[col] = "background-color: #1976D2; color: white; font-weight: bold; font-size: 14px"
+    # ランディング内訳 = 薄青
     for col in LANDING_SUB_COLS:
         if col in df.columns:
             styles[col] = "background-color: #D6E4F0; color: #0D47A1"
-    # 経由_合計 = 濃緑+白字+太字
+    # 経由_合計 = 緑強調
     for col in VIA_TOTAL_COLS:
         if col in df.columns:
-            styles[col] = "background-color: #388E3C; color: white; font-weight: bold"
-    # 経由内訳 = 薄緑+濃い緑字
+            styles[col] = "background-color: #2E7D32; color: white; font-weight: bold; font-size: 14px"
+    # 経由内訳 = 薄緑
     for col in VIA_SUB_COLS:
         if col in df.columns:
             styles[col] = "background-color: #E8F5E9; color: #1B5E20"
-    # 予約 = オレンジ
-    for col in RSV_COLS:
+    # 予約数（合計扱い）= オレンジ強調
+    for col in ["予約数"]:
+        if col in df.columns:
+            styles[col] = "background-color: #E65100; color: white; font-weight: bold; font-size: 14px"
+    # 予約率(%)
+    for col in ["予約率(%)"]:
         if col in df.columns:
             styles[col] = "background-color: #FFE0B2; color: #E65100; font-weight: bold"
     # メニュー = 紫
@@ -463,11 +475,11 @@ with tab6:
                     cm["タイプ"] = cm.apply(_flag_row, axis=1)
                     ma = cm.groupby(["menu_type","menu_id","タイプ","name"]).agg(
                         URL=("sample_url","first"), SS=("ss","sum"),
-                        予約数=("rsv_count","sum"), 予約ボタン=("click_reserve","sum"),
+                        予約数=("rsv_count","sum"),
                     ).reset_index()
                     ma["CTR(%)"] = (ma["予約数"]/ma["SS"]*100).round(1).where(ma["SS"]>0, 0)
                     ma = ma.rename(columns={"name":"メニュー名"})
-                    top_m = ma[["タイプ","メニュー名","URL","SS","予約数","予約ボタン","CTR(%)"]].sort_values("SS", ascending=False).head(10)
+                    top_m = ma[["タイプ","メニュー名","URL","SS","予約数","CTR(%)"]].sort_values("SS", ascending=False).head(10)
                     st.dataframe(top_m, use_container_width=True, hide_index=True,
                         column_config={
                             "CTR(%)": st.column_config.ProgressColumn(min_value=0, max_value=25, format="%.1f%%"),
