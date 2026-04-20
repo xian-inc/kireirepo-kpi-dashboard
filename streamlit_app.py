@@ -375,20 +375,88 @@ with tab6:
                           hovermode="x unified", height=350)
         st.plotly_chart(fig, use_container_width=True)
 
-        # アプローチポイント
-        st.markdown("### 💡 アプローチポイント")
-        points = []
-        if sel_row["予約数"] == 0 and sel_row["合計SS"] > 500:
-            points.append(f"🔥 **営業チャンス**: SS {sel_row['合計SS']:,}件あるのに予約0件")
+        # ========= 📋 営業メモ =========
+        st.markdown("### 📋 営業メモ")
+
+        # --- 基本指標 ---
+        with st.container():
+            st.markdown("#### ▼ 基本指標")
+            trend_line = ""
+            ss_vals = [sel_row[f"{m}_SS"] if f"{m}_SS" in sel_row else 0 for m in []]
+            # 月別推移からトレンド判定
+            monthly_ss_list = [int(r["ss"]) if r is not None else 0 for r in [None]]
+            # 推移はbuild_summary で取得
+            sstrend_vals = []
+            for m_ym, m_lbl in MONTH_LABELS.items():
+                m_df_t = build_summary(m_ym)
+                m_r_t = m_df_t[m_df_t["store_id"]==sid]
+                v = int(m_r_t.iloc[0]["合計SS"]) if len(m_r_t)>0 else 0
+                sstrend_vals.append((m_lbl, v))
+            vals_only = [v for _,v in sstrend_vals if v > 0]
+            if len(vals_only) >= 3:
+                if all(vals_only[i]>vals_only[i+1] for i in range(len(vals_only)-1)): trend_line = "📉 減少傾向"
+                elif all(vals_only[i]<vals_only[i+1] for i in range(len(vals_only)-1)): trend_line = "📈 上昇傾向"
+                elif max(vals_only)-min(vals_only) < max(vals_only)*0.2: trend_line = "➡️ ほぼ横ばい"
+                else: trend_line = "📊 月別変動あり"
+            st.info(f"**予約方式**: {sel_row['予約方式']}  |  **合計SS**: {sel_row['合計SS']:,}  |  **予約数**: {sel_row['予約数']:,}  |  **予約率**: {sel_row['予約率(%)']:.2f}%  |  {trend_line}")
+
+        # --- メニュー保有状況 ---
+        st.markdown("#### ▼ メニュー保有状況")
+        menu_msgs = []
         if sel_row["sp-menu数"] == 0:
-            points.append("🎯 **限定メニュー(sp-menu)未保有** → 作成で予約獲得チャンス")
+            menu_msgs.append("🎯 **限定メニュー(sp-menu): 未保有** → 作成で予約獲得チャンス")
         else:
-            points.append(f"✅ 限定メニュー(sp-menu)保有: {sel_row['sp-menu数']}件")
+            menu_msgs.append(f"✅ **限定メニュー(sp-menu)保有**: {sel_row['sp-menu数']}件")
         if sel_row["キレイレポ限定数"] == 0:
-            points.append("🎯 **キレイレポ限定フラグ未保有** → 限定付けるだけで露出アップ")
+            menu_msgs.append("🎯 **キレイレポ限定フラグ: 未保有** → 限定付けるだけで露出アップ")
         else:
-            points.append(f"✅ キレイレポ限定フラグ保有: {sel_row['キレイレポ限定数']}件")
-        for p in points: st.markdown(f"- {p}")
+            menu_msgs.append(f"✅ **キレイレポ限定フラグ保有**: {sel_row['キレイレポ限定数']}件")
+        for m in menu_msgs:
+            st.markdown(f"- {m}")
+
+        # --- 参考：他院の成功sp-menu ---
+        if sel_row["sp-menu数"] == 0:
+            successful_sp = df_menu_m[(df_menu_m["menu_type"]=="sp-menus") & (df_menu_m["click_reserve"]>=5)].copy()
+            if len(successful_sp) > 0:
+                successful_sp["CTR_click"] = (successful_sp["click_reserve"]/successful_sp["ss"]*100).round(1).where(successful_sp["ss"]>0, 0)
+                sp_agg = successful_sp.groupby(["menu_id","name","store_id"]).agg(
+                    click_reserve=("click_reserve","sum"), ss=("ss","sum"),
+                ).reset_index()
+                sp_agg["CTR_click"] = (sp_agg["click_reserve"]/sp_agg["ss"]*100).round(1).where(sp_agg["ss"]>0, 0)
+                sp_agg = sp_agg.sort_values("click_reserve", ascending=False).head(5)
+
+                st.markdown("**📌 参考：他院で予約につながってる限定メニュー(sp-menu)**")
+                for _, sr in sp_agg.iterrows():
+                    nm = sr.get("name") or "(名前不明)"
+                    cln = store_map.get(str(sr["store_id"]), f"store{sr['store_id']}")[:20]
+                    st.markdown(f"- {str(nm)[:40]}（{cln}）→ 予約ボタン**{int(sr['click_reserve'])}クリック**・CTR**{sr['CTR_click']}%**")
+
+        # --- 掲載リストページ TOP3 ---
+        clinic_r_full = df_routes[df_routes["store_id"]==sid].copy()
+        if len(clinic_r_full) > 0:
+            clinic_r_full = clinic_r_full.merge(df_list_ss, on="list_path", how="left")
+            clinic_r_full["カテゴリ"] = clinic_r_full["list_path"].apply(cat_name)
+            cat_agg_full = clinic_r_full.groupby("カテゴリ").agg(
+                経由SS=("via_ss","sum"),
+                ページSS=("page_ss","max"),
+            ).reset_index()
+            cat_agg_full = cat_agg_full[cat_agg_full["カテゴリ"]!=""]
+            cat_agg_full["流入率"] = (cat_agg_full["経由SS"]/cat_agg_full["ページSS"]*100).round(1).where(cat_agg_full["ページSS"]>0, 0)
+            top3_cat = cat_agg_full.sort_values("経由SS", ascending=False).head(3)
+
+            if len(top3_cat) > 0:
+                st.markdown("#### ▼ 掲載されてる主要リストページ（経由流入TOP3）")
+                for _, r_ in top3_cat.iterrows():
+                    cat = r_["カテゴリ"]
+                    ck = cat.split("＞")[0] if "＞" in cat else cat
+                    via = int(r_["経由SS"])
+                    pgs = int(r_["ページSS"])
+                    rate = r_["流入率"]
+                    if sel_row["sp-menu数"] == 0:
+                        action = "限定メニュー作れば予約獲得チャンス"
+                    else:
+                        action = f"{ck}系の限定メニュー追加で予約獲得チャンス"
+                    st.markdown(f"- 🎯 **【{cat}】** ページSS **{pgs:,}件** / 経由SS **{via:,}件**（流入率**{rate:.1f}%**）→ {action}")
 
         # ========= 月別タブ切替 =========
         st.markdown("### 📅 月別詳細（タブ切り替え）")
