@@ -296,13 +296,14 @@ def style_df(df):
 
 def render_summary_tab(df_month, title):
     st.subheader(title)
-    col1, col2, col3, col4 = st.columns(4)
-    with col1: st.metric("合計SS", f"{df_month['合計SS'].sum():,}")
-    with col2: st.metric("予約数", f"{df_month['予約数'].sum():,}")
-    with col3:
+    col1, col2, col3, col4, col5 = st.columns(5)
+    with col1: st.metric("予約解放済み院数", f"{len(stores)}院")
+    with col2: st.metric("合計SS", f"{df_month['合計SS'].sum():,}")
+    with col3: st.metric("予約数", f"{df_month['予約数'].sum():,}")
+    with col4:
         rate = df_month['予約数'].sum()/df_month['合計SS'].sum()*100 if df_month['合計SS'].sum()>0 else 0
         st.metric("平均予約率", f"{rate:.2f}%")
-    with col4:
+    with col5:
         no_rsv = len(df_month[(df_month['予約数']==0) & (df_month['合計SS']>0)])
         st.metric("予約0院数", f"{no_rsv}院")
 
