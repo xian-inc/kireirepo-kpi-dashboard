@@ -247,7 +247,7 @@ selected_clinic = selected_label.split("｜", 1)[1] if selected_label else None
 # ======== メイン ========
 st.title("🏥 予約解放済みクリニック 営業ダッシュボード")
 
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["📊 全期間合計", "📅 1月", "📅 2月", "📅 3月", "📅 4月", "🔍 クリニック詳細 / 💡営業チャンス"])
+tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs(["📊 全期間合計", "📅 1月", "📅 2月", "📅 3月", "📅 4月", "🔍 クリニック詳細 / 💡営業チャンス", "🎯 限定メニュー推薦"])
 
 LANDING_SUB_COLS = ["ランディング_検索","ランディング_SNS","ランディング_直接","ランディング_他サイト"]
 LANDING_TOTAL_COLS = ["ランディング_合計"]
@@ -566,6 +566,96 @@ with tab6:
         fig.update_yaxes(autorange="reversed")
         st.plotly_chart(fig, use_container_width=True)
         st.dataframe(chance, use_container_width=True, hide_index=True)
+
+# ===== タブ7: 限定メニュー推薦 =====
+with tab7:
+    st.header("🎯 限定メニュー推薦")
+    st.caption("予約解放済みクリニックの限定メニュー（exclusive）の実績から、「どのメニューを持てば予約が入るか」を根拠付きで表示します。")
+
+    # 全期間メニューデータ × メニュー名 × campaign_type
+    df_menu_all = pd.DataFrame(data["menu_monthly"])
+    df_menu_all["menu_id"] = df_menu_all["menu_id"].astype(str)
+    df_menu_all_m = df_menu_all.merge(
+        df_names[["menu_id","name","campaign_type"]].drop_duplicates("menu_id"),
+        on="menu_id", how="left"
+    )
+    df_exc_all = df_menu_all_m[df_menu_all_m["campaign_type"]=="exclusive"].copy()
+    df_exc_all["store_id"] = df_exc_all["store_id"].astype(str)
+
+    # 限定メニュー全体ランキング
+    exc_rank = df_exc_all.groupby(["menu_id","name"]).agg(
+        導入院数=("store_id","nunique"),
+        合計SS=("ss","sum"),
+        合計予約=("rsv_count","sum"),
+    ).reset_index()
+    exc_rank = exc_rank[exc_rank["合計SS"] > 0].copy()
+    exc_rank["予約CVR(%)"] = (exc_rank["合計予約"] / exc_rank["合計SS"] * 100).round(2)
+    exc_rank = exc_rank.sort_values("合計予約", ascending=False).reset_index(drop=True)
+
+    st.subheader("📊 限定メニュー 予約実績ランキング（全クリニック横断）")
+    col_a, col_b, col_c = st.columns(3)
+    col_a.metric("限定メニュー種数", f"{len(exc_rank)}種")
+    col_b.metric("合計予約数（限定メニュー経由）", f"{int(exc_rank['合計予約'].sum()):,}")
+    sort_opt = col_c.selectbox("並び順", ["予約数が多い順", "CVRが高い順（SS10以上）"], key="exc_sort")
+
+    if sort_opt == "CVRが高い順（SS10以上）":
+        exc_disp = exc_rank[exc_rank["合計SS"]>=10].sort_values("予約CVR(%)", ascending=False).head(30)
+    else:
+        exc_disp = exc_rank.head(30)
+
+    st.dataframe(exc_disp[["name","導入院数","合計SS","合計予約","予約CVR(%)"]].rename(columns={"name":"メニュー名"}),
+        use_container_width=True, hide_index=True,
+        column_config={"予約CVR(%)": st.column_config.ProgressColumn(min_value=0, max_value=40, format="%.2f%%")})
+
+    st.markdown("---")
+
+    # クリニック別推薦
+    st.subheader("🏥 クリニック別 おすすめ限定メニュー")
+    clinic_options = sorted(store_map.values())
+    sel_c = st.selectbox("クリニックを選択", ["（選択してください）"] + clinic_options, key="exc_clinic_sel")
+
+    if sel_c != "（選択してください）":
+        sid_sel = next((k for k, v in store_map.items() if v == sel_c), None)
+        if sid_sel:
+            # そのクリニックが現在持っている限定メニューID
+            owned_ids = set(df_exc_all[df_exc_all["store_id"]==sid_sel]["menu_id"].unique())
+
+            # 他院が持っていて実績があるメニュー（このクリニックが未保有のもの）
+            others_exc = df_exc_all[df_exc_all["store_id"]!=sid_sel]
+            recommend = others_exc.groupby(["menu_id","name"]).agg(
+                導入院数=("store_id","nunique"),
+                合計SS=("ss","sum"),
+                合計予約=("rsv_count","sum"),
+            ).reset_index()
+            recommend = recommend[recommend["合計SS"]>0].copy()
+            recommend["予約CVR(%)"] = (recommend["合計予約"] / recommend["合計SS"] * 100).round(2)
+            recommend = recommend[~recommend["menu_id"].isin(owned_ids)]
+            recommend = recommend[recommend["合計予約"]>=1].sort_values("合計予約", ascending=False)
+
+            # 現在保有メニューの実績表示
+            st.markdown(f"**現在の限定メニュー（{len(owned_ids)}種）の実績**")
+            if owned_ids:
+                own_perf = df_exc_all[df_exc_all["store_id"]==sid_sel].groupby(["menu_id","name"]).agg(
+                    SS=("ss","sum"), 予約数=("rsv_count","sum")
+                ).reset_index()
+                own_perf["予約CVR(%)"] = (own_perf["予約数"]/own_perf["SS"]*100).round(2).where(own_perf["SS"]>0,0)
+                own_perf = own_perf.sort_values("予約数", ascending=False)
+                st.dataframe(own_perf[["name","SS","予約数","予約CVR(%)"]].rename(columns={"name":"メニュー名"}),
+                    use_container_width=True, hide_index=True,
+                    column_config={"予約CVR(%)": st.column_config.ProgressColumn(min_value=0, max_value=40, format="%.2f%%")})
+            else:
+                st.info("限定メニューなし")
+
+            st.markdown(f"**🎯 このクリニックに推薦する限定メニュー（他院実績あり・未導入）**")
+            if len(recommend) > 0:
+                st.caption(f"根拠：他の予約解放済みクリニックで実際に予約が入っているメニューのうち、{sel_c}がまだ持っていないもの。予約数・CVR順。")
+                st.dataframe(
+                    recommend[["name","導入院数","合計SS","合計予約","予約CVR(%)"]].rename(columns={"name":"メニュー名"}).head(20),
+                    use_container_width=True, hide_index=True,
+                    column_config={"予約CVR(%)": st.column_config.ProgressColumn(min_value=0, max_value=40, format="%.2f%%")}
+                )
+            else:
+                st.success("他院実績のある限定メニューはすでにすべて保有しています。")
 
 st.markdown("---")
 st.caption("データソース: BigQuery GA4（非サンプリング） / replica_kireirepo_production  |  毎日9:07自動更新")
